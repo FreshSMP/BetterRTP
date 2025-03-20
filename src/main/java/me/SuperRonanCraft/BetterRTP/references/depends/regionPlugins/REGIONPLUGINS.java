@@ -8,6 +8,7 @@ public enum REGIONPLUGINS {
     GRIEFDEFENDER("GriefDefender", new RTP_GriefDefender()),
     GRIEFPREVENTION("GriefPrevention", new RTP_GriefPrevention()),
     HCLAIMS("hClaims", "hClaim", new RTP_hClaims()),
+    HUSKCLAIMS("HuskClaims", new RTP_HuskClaims()),
     HUSKTOWNS("HuskTowns", new RTP_HuskTowns()),
     KINGDOMSX("KingdomsX", "Kingdoms", new RTP_KingdomsX()),
     LANDS("Lands", new RTP_Lands()),

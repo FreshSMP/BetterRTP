@@ -113,7 +113,7 @@
         <!-- PaperMC Repo -->
         <repository>
             <id>papermc</id>
-            <url>https://papermc.io/repo/repository/maven-public/</url>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
         <!-- Vault Repo -->
         <repository>
@@ -165,6 +165,11 @@
         <repository>
             <id>devmart-public</id>
             <url>https://nexuslite.gcnt.net/repos/public/</url>
+        </repository>
+        <!-- Used by Husk plugins -->
+        <repository>
+            <id>william278-releases</id>
+            <url>https://repo.william278.net/releases</url>
         </repository>
     </repositories>
     <dependencies>
@@ -327,6 +332,13 @@
             <version>2.11.2</version>
             <scope>provided</scope>
         </dependency>
+        <!-- HuskClaims (https://www.spigotmc.org/resources/huskclaims.114467/) (Added in 3.6.13)-->
+        <dependency>
+            <groupId>net.william278.huskclaims</groupId>
+            <artifactId>huskclaims-bukkit</artifactId>
+            <version>1.5</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- Husktown (https://www.spigotmc.org/resources/husktowns.92672/) (Added in 3.4.5)-->
         <dependency>
             <groupId>net.william278.husktowns</groupId>
@@ -358,7 +370,7 @@
         <dependency>
             <groupId>com.github.WhipDevelopment</groupId>
             <artifactId>CrashClaim</artifactId>
-            <version>-75abe3b665-1</version>
+            <version>c697d3e9ef</version>
             <scope>provided</scope>
         </dependency>
 
