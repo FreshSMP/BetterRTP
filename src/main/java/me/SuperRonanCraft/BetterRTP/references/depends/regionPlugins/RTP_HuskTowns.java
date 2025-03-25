@@ -5,18 +5,12 @@ import org.bukkit.Location;
 
 public class RTP_HuskTowns implements RegionPluginCheck {
 
-    private final BukkitHuskTownsAPI huskTownsAPI;
-
-    public RTP_HuskTowns() {
-        this.huskTownsAPI = BukkitHuskTownsAPI.getInstance();
-    }
-
     @Override
     public boolean check(Location loc) {
         boolean result = true;
         if (REGIONPLUGINS.HUSKTOWNS.isEnabled()) {
             try {
-                result = !huskTownsAPI.getClaimAt(loc).isPresent();
+                result = !BukkitHuskTownsAPI.getInstance().getClaimAt(loc).isPresent();
             } catch (Exception e) {
                 e.printStackTrace();
             }
