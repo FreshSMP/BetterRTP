@@ -19,13 +19,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
 public class DatabaseQueue extends SQLite {
-
-    private static final ExecutorService SQLITE_EXECUTOR = Executors.newSingleThreadExecutor();
 
     public DatabaseQueue() {
         super(DATABASE_TYPE.QUEUE);
@@ -64,7 +60,7 @@ public class DatabaseQueue extends SQLite {
     public List<QueueData> getInRange(QueueRangeData range) {
         final List<QueueData> queueDataList = new ArrayList<>();
         try {
-            SQLITE_EXECUTOR.submit(() -> {
+            SQLiteExecutor.EXECUTOR.submit(() -> {
                 Connection conn = null;
                 PreparedStatement ps = null;
                 ResultSet rs = null;
@@ -103,7 +99,7 @@ public class DatabaseQueue extends SQLite {
     //Set a queue to save
     public QueueData addQueue(Location loc) {
         try {
-            return SQLITE_EXECUTOR.submit(() -> {
+            return SQLiteExecutor.EXECUTOR.submit(() -> {
                 String sql = "INSERT INTO " + tables.get(0) + " ("
                         + COLUMNS.X.name + ", "
                         + COLUMNS.Z.name + ", "
@@ -152,7 +148,7 @@ public class DatabaseQueue extends SQLite {
 
     public boolean removeLocation(Location loc) {
         try {
-            return SQLITE_EXECUTOR.submit(() -> {
+            return SQLiteExecutor.EXECUTOR.submit(() -> {
                 String sql = "DELETE FROM " + tables.get(0) + " WHERE "
                         + COLUMNS.X.name + " = ? AND "
                         + COLUMNS.Z.name + " = ? AND "
