@@ -143,6 +143,10 @@ public class CooldownHandler {
         if (!isEnabled()) return;
         downloading.add(player);
         PlayerData playerData = getData(player);
+        if (playerData == null) {
+            return;
+        }
+
         if (getDatabaseWorlds() != null) //Per World enabled?
             for (World world : Bukkit.getWorlds()) {
                 //Cooldowns

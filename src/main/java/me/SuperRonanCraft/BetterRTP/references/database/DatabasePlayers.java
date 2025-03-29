@@ -42,6 +42,9 @@ public class DatabasePlayers extends SQLite {
     }
 
     public void setupData(PlayerData data) {
+        if (data == null || data.player == null) {
+            return;
+        }
         try {
             Future<?> task = SQLiteExecutor.EXECUTOR.submit(() -> {
                 Connection conn = null;

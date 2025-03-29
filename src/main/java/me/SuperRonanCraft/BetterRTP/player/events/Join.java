@@ -20,9 +20,7 @@ public class Join {
     static void event(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         updater(p);
-        AsyncHandler.async(() -> {
-                getPl().getCooldowns().loadPlayer(p);
-            });
+        AsyncHandler.async(() -> getPl().getCooldowns().loadPlayer(p));
         rtpOnFirstJoin(p);
     }
 
