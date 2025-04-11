@@ -3,6 +3,7 @@ package me.SuperRonanCraft.BetterRTP.references.depends.regionPlugins;
 import lombok.Getter;
 import me.SuperRonanCraft.BetterRTP.references.settings.SoftDepends;
 
+@Getter
 public enum REGIONPLUGINS {
     FACTIONSUUID("FactionsUUID", "Factions", new RTP_FactionsUUID()),
     GRIEFDEFENDER("GriefDefender", new RTP_GriefDefender()),
@@ -23,9 +24,9 @@ public enum REGIONPLUGINS {
     FACTIONSBRIDGE("FactionsBridge", new RTP_FactionsBridge()),
     CRASH_CLAIM("CrashClaim", new RTP_CrashClaim());
 
-    @Getter private final SoftDepends.RegionPlugin plugin = new SoftDepends.RegionPlugin();
-    @Getter private final String setting_name, pluginyml_name;
-    @Getter private final RegionPluginCheck validator;
+    private final SoftDepends.RegionPlugin plugin = new SoftDepends.RegionPlugin();
+    private final String setting_name, pluginyml_name;
+    private final RegionPluginCheck validator;
 
     REGIONPLUGINS(String all_name, RegionPluginCheck validator) {
         this(all_name, all_name, validator);
