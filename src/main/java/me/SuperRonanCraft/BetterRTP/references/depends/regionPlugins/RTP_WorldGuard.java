@@ -19,9 +19,6 @@ public class RTP_WorldGuard implements RegionPluginCheck {
                 RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
                 RegionQuery query = container.createQuery();
                 ApplicableRegionSet set = query.getApplicableRegions(BukkitAdapter.adapt(loc));
-                //for (ProtectedRegion region : set.getRegions()) {
-                 //   region.getId()
-                //}
                 result = set.size() == 0;
             } catch (Exception e) {
                e.printStackTrace();
