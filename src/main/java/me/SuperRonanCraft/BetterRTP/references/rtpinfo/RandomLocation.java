@@ -25,44 +25,32 @@ public class RandomLocation {
     }
 
     private static Location generateSquare(RTPWorld rtpWorld) {
-        //Generate a random X and Z based off the quadrant selected
-        int min = rtpWorld.getMinRadius();
-        int max = rtpWorld.getMaxRadius() - min;
-        int x, z;
-        int quadrant = new Random().nextInt(4);
+        // Return a Location where a random X and Z are within the bounds defined by MinRadius and MaxRadius
+        int radius_min = rtpWorld.getMinRadius();
+        int radius_max = rtpWorld.getMaxRadius();
         try {
-            switch (quadrant) {
-                case 0: // Positive X and Z
-                    x = new Random().nextInt(max) + min;
-                    z = new Random().nextInt(max) + min;
-                    break;
-                case 1: // Negative X and Z
-                    x = -new Random().nextInt(max) - min;
-                    z = -(new Random().nextInt(max) + min);
-                    break;
-                case 2: // Negative X and Positive Z
-                    x = -new Random().nextInt(max) - min;
-                    z = new Random().nextInt(max) + min;
-                    break;
-                default: // Positive X and Negative Z
-                    x = new Random().nextInt(max) + min;
-                    z = -(new Random().nextInt(max) + min);
-                    break;
+            if (radius_min < 0 || radius_max < 0 || radius_min >= radius_max) {
+                throw new IllegalArgumentException(); // If MinRadius or MaxRadius is negative, throw an exception
             }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            BetterRTP.getInstance().getLogger().warning("A bounding location was negative! Please check your config only has positive x/z for max/min radius!");
+            BetterRTP.getInstance().getLogger().warning("Incorrect configuration! Check your config and confirm that MinRadius is smaller than MaxRadius and that they are both positive numbers!");
             BetterRTP.getInstance().getLogger().warning("Max: " + rtpWorld.getMaxRadius() + " Min: " + rtpWorld.getMinRadius());
             return null;
         }
+        // Generate a random X and Z based off the radius. No quadrants voodoo.
+        Random random = new Random();
+        int x = random.nextInt(radius_max * 2) - radius_max;
+        int z = (Math.abs(x) >= radius_min)
+            ? random.nextInt(radius_max * 2) - radius_max
+            : (random.nextBoolean() ? 1 : -1) * (radius_min + random.nextInt(radius_max - radius_min));
         x += rtpWorld.getCenterX();
         z += rtpWorld.getCenterZ();
-        //System.out.println(quadrant);
         return new Location(rtpWorld.getWorld(), x, 69, z);
     }
 
     private static Location generateRound(RTPWorld rtpWorld) {
-        //Generate a random X and Z based off location on a spiral curve
+        // Return a random X and Z based off location on a spiral curve
         int min = rtpWorld.getMinRadius();
         int max = rtpWorld.getMaxRadius() - min;
         int x, z;
